@@ -1,0 +1,21 @@
+{
+  "name": "billiards",
+  "description": "General Npm",
+  "scripts": {
+    "upgrade_dartdoc": "pub global activate dartdoc",
+    "test": "flutter test --coverage",
+    "doc": "dartdoc -q",
+    "show_doc": "dhttpd --path doc/api",
+    "d": "npm run doc && npm run show_doc",
+    "build" : "npm run test && npm run d",
+    "i" : "npm run test && npm run doc"
+  },
+  "engines": {
+    "node": "12"
+  },
+  "main": "build/node/index.dart.js",
+  "devDependencies": {
+    "cucumber-html-reporter": "^5.4.0"
+  },
+  "private": true
+}

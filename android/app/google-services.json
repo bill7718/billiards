@@ -1,0 +1,127 @@
+{
+  "project_info": {
+    "project_number": "938186650443",
+    "firebase_url": "https://greek-771801.firebaseio.com",
+    "project_id": "greek-771801",
+    "storage_bucket": "greek-771801.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938186650443:android:4e0633252fd0080baaaece",
+        "android_client_info": {
+          "package_name": "com.example.billiards"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938186650443-muohk2cofbbkr491lpt5cbeskar5s14v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNrlxqQ5bAEBhxcBoo3V4Wx2YqGX7Zmsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938186650443-muohk2cofbbkr491lpt5cbeskar5s14v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938186650443:android:9a059c70de3fe5a8aaaece",
+        "android_client_info": {
+          "package_name": "com.example.cyprus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938186650443-muohk2cofbbkr491lpt5cbeskar5s14v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNrlxqQ5bAEBhxcBoo3V4Wx2YqGX7Zmsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938186650443-muohk2cofbbkr491lpt5cbeskar5s14v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938186650443:android:ce6a2dbbbe10b421aaaece",
+        "android_client_info": {
+          "package_name": "com.stokes7718.flutterpocapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938186650443-muohk2cofbbkr491lpt5cbeskar5s14v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNrlxqQ5bAEBhxcBoo3V4Wx2YqGX7Zmsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938186650443-muohk2cofbbkr491lpt5cbeskar5s14v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938186650443:android:4d7226643d2baac6aaaece",
+        "android_client_info": {
+          "package_name": "com.stokes7718.mayor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938186650443-muohk2cofbbkr491lpt5cbeskar5s14v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNrlxqQ5bAEBhxcBoo3V4Wx2YqGX7Zmsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938186650443-muohk2cofbbkr491lpt5cbeskar5s14v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

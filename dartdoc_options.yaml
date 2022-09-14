@@ -1,0 +1,17 @@
+
+dartdoc:
+  categories:
+    ReadMe:
+      markdown: README.md
+  ignore:
+    - broken-link
+    - missing-from-search-index
+    - unresolved-export
+    - unresolved-doc-reference
+    - no-canonical-found
+    - unknown-file
+    - no-library-level-docs
+  include: [ authenticate, service_data, pages, widgets, data, journey, widgets ]
+
+
+
