@@ -77,6 +77,7 @@ class SplitServiceContentState extends State<SplitServiceContent> {
     );
   }
 
+
   List<TextSpan> parse(
       String text, TextStyle? normalStyle, TextStyle? boldStyle) {
     var response = <TextSpan>[];
