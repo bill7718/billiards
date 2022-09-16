@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+
 class SplitServiceContent extends StatefulWidget {
   final String content;
   final RenderServiceTheme displayTheme;
@@ -18,7 +19,7 @@ class SplitServiceContent extends StatefulWidget {
 }
 
 class SplitServiceContentState extends State<SplitServiceContent> {
-  late List<TextSpan>? remainingSpans;
+  List<TextSpan>? remainingSpans;
   late List<TextSpan> currentSpans;
 
   List<List<TextSpan>> pages = <List<TextSpan>>[];

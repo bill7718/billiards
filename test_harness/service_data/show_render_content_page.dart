@@ -28,8 +28,10 @@ not really **bold
         SplitServiceContent(
             content: content,
             displayTheme:
-                RenderServiceTheme(58, 1600, 600, Colors.black, Colors.white),
-        callback: (_) { },),
+                RenderServiceTheme(50, 1600, 600, Colors.black, Colors.white),
+        callback: (pages) {
+              print(pages.toString());
+        },),
         Expanded(child: Container()),
       ]));
 }
