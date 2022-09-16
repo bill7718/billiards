@@ -18,8 +18,7 @@ two lines missing
 **bold** at the beginning
 bold **in the** middle
 bold at the **end**
-not really **bold
-''';
+not really **bold''';
   showPage(Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +30,7 @@ not really **bold
                 RenderServiceTheme(60, 1600, 600, Colors.black, Colors.white),
         callback: (pages) {
               for (var spans in pages) {
-                print(spans.length);
+                print('spans: ${spans.length}');
               }
 
         },),
