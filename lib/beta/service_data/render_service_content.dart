@@ -43,8 +43,11 @@ class SplitServiceContentState extends State<SplitServiceContent> {
         fontSize: widget.displayTheme.fontSize,
         color: widget.displayTheme.fontColor);
 
-    remainingSpans ??= parse(widget.content, normalStyle, boldStyle);
-    currentSpans.addAll(remainingSpans ?? <TextSpan>[]);
+    if (remainingSpans== null) {
+      remainingSpans ??= parse(widget.content, normalStyle, boldStyle);
+      currentSpans.addAll(remainingSpans ?? <TextSpan>[]);
+    }
+
 
     return RenderServiceContent(
       key: key,
@@ -56,7 +59,9 @@ class SplitServiceContentState extends State<SplitServiceContent> {
             currentSpans.removeLast();
           });
         } else {
-          pages.add(currentSpans);
+          var spans = <TextSpan>[];
+          spans.addAll(currentSpans);
+          pages.add(spans);
           remainingSpans?.removeRange(0, currentSpans.length);
           currentSpans.clear();
           currentSpans.addAll(remainingSpans ?? <TextSpan>[]);
