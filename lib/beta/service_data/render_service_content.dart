@@ -65,7 +65,6 @@ class SplitServiceContentState extends State<SplitServiceContent> {
           remainingSpans?.removeRange(0, currentSpans.length);
           currentSpans.clear();
           currentSpans.addAll(remainingSpans ?? <TextSpan>[]);
-          print('current: ${currentSpans.length}');
           if (currentSpans.isNotEmpty) {
             setState(() {
 
