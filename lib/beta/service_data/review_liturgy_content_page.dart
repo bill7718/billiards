@@ -34,7 +34,6 @@ class ReviewLiturgyContentPageState extends State<ReviewLiturgyContentPage>{
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey();
-    var text = '';
     final serviceTheme = ServiceTheme(60, 1600, 1200, Colors.black, Colors.white);
     return Scaffold(
       appBar: AuthenticatedInJourneyAppBar(
