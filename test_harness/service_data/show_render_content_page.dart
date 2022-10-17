@@ -1,5 +1,6 @@
 import 'package:billiards/alpha/show_page.dart';
-import 'package:billiards/beta/service_data/render_service_content.dart';
+import 'package:billiards/beta/service_data/split_service_content.dart';
+import 'package:billiards/beta/service_data/service_theme.dart';
 import 'package:billiards/service_data.dart';
 
 import 'package:billiards/src/journey/journey_controller.dart';
@@ -27,7 +28,7 @@ not really **bold''';
         SplitServiceContent(
             content: content,
             displayTheme:
-                RenderServiceTheme(60, 1600, 600, Colors.black, Colors.white),
+                ServiceTheme(60, 1600, 900, Colors.black, Colors.white),
         callback: (pages) {
               for (var spans in pages) {
                 print('spans: ${spans.length}');

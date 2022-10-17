@@ -1,10 +1,13 @@
+import 'package:billiards/beta/service_data/split_service_content.dart';
+import 'package:billiards/beta/service_data/service_theme.dart';
+import 'package:billiards/beta/service_data/show_service_content.dart';
+import 'package:billiards/beta/service_data/text_part.dart';
 import 'package:billiards/billiards_theme.dart';
+import 'package:billiards/journey.dart';
 import 'package:billiards/widgets.dart';
 import 'package:flutter/material.dart';
 
-import '../../src/journey/journey_controller.dart';
-
-class ReviewLiturgyContentPage extends StatelessWidget {
+class ReviewLiturgyContentPage extends StatefulWidget {
   final ReviewLiturgyContentInputState inputState;
   final PageEventHandler<ReviewLiturgyContentOutputState> handler;
 
@@ -13,13 +16,30 @@ class ReviewLiturgyContentPage extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<StatefulWidget> createState()=>ReviewLiturgyContentPageState();
+}
+
+class ReviewLiturgyContentPageState extends State<ReviewLiturgyContentPage>{
+
+  bool parsed = false;
+  List<List<TextPart>> pages = <List<TextPart>>[];
+
+  @override
+  void initState() {
+    super.initState();
+    parsed = false;
+    pages.clear();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey();
     var text = '';
+    final serviceTheme = ServiceTheme(60, 1600, 1200, Colors.black, Colors.white);
     return Scaffold(
       appBar: AuthenticatedInJourneyAppBar(
           title: 'Create a New Liturgy Item',
-          email: inputState.email,
+          email: widget.inputState.email,
           home: () {}),
       body: Container(
           margin: const EdgeInsets.all(25),
@@ -32,15 +52,25 @@ class ReviewLiturgyContentPage extends StatelessWidget {
                   Center(
                       child: Heading(
                           text:
-                              'Review The Liturgy Content for ${inputState.name}')),
+                              'Review The Liturgy Content for ${widget.inputState.name}')),
                   FormRow(
                       content: ErrorMessage(
-                    text: inputState.error,
+                    text: widget.inputState.error,
                   )),
-                  FormRow(
+                  if (!parsed)
+                    FormRow(content: Offstage(
+                      child: SplitServiceContent(content: widget.inputState.text, displayTheme:
+                      serviceTheme, callback: (l) {
+                        setState(() {
+                          pages = l;
+                          parsed = true;
+                        });
+                      },),
+                    )),
+                  if (parsed) Expanded ( child: FormRow(
                     flex: 5,
-                    content: BodyText(text: inputState.text),
-                  ),
+                    content: ShowServiceContent(pages: pages, theme: serviceTheme,),
+                  )),
                   SizedBox(height: Theme.of(context).extension<BilliardsTheme>()?.blankLineHeight ?? 0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -49,7 +79,7 @@ class ReviewLiturgyContentPage extends StatelessWidget {
                         child: const Text('Back'),
                         onPressed: () {
                           final nav = Navigator.of(context);
-                          handler.handleEvent(
+                          widget.handler.handleEvent(
                               nav,
                               ReviewLiturgyContentOutputState(
                                   event: DefaultEvent.back));
@@ -61,7 +91,7 @@ class ReviewLiturgyContentPage extends StatelessWidget {
                           final state = formKey.currentState as FormState;
                           if (state.validate()) {
                             final nav = Navigator.of(context);
-                            handler.handleEvent(
+                            widget.handler.handleEvent(
                                 nav,
                                 ReviewLiturgyContentOutputState(
                                     event: DefaultEvent.next));
