@@ -16,6 +16,7 @@ class User extends PersistableDataObject {
   static const String lastLoginLabel = 'lastLogin';
   static const String lastButOneLoginLabel = 'lastButOneLogin';
   static const String loginFailureCountLabel = 'loginFailureCount';
+  static const String lastFailedLoginLabel = 'lastFailedLogin';
 
   User({Map<String, dynamic>? data }) : super(objectType, data: data);
 
@@ -34,11 +35,9 @@ class User extends PersistableDataObject {
 
   DateTime? get lastButOneLogin=>getDateTime(lastButOneLoginLabel);
 
+  DateTime? get lastFailedLogin=>getDateTime(lastFailedLoginLabel);
+
   int get loginFailureCount=> get(loginFailureCountLabel) ?? 0;
-  //
-  // void resetLoginFailureCount()=>set(loginFailureCountLabel, null);
-  //
-  // void incrementLoginFailureCount() =>set(loginFailureCountLabel, loginFailureCount + 1);
 
   void setLoginDateTime(DateTime d) {
     setDateTime(lastButOneLoginLabel, lastLogin);

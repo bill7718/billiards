@@ -1,8 +1,7 @@
 import 'package:billiards/billiards_theme.dart';
+import 'package:billiards/src/journey/journey_controller.dart';
 import 'package:billiards/widgets.dart';
 import 'package:flutter/material.dart';
-
-import '../../src/journey/journey_controller.dart';
 
 class LoginPage extends StatelessWidget {
   final LoginInputState inputState;
@@ -77,7 +76,7 @@ class LoginPage extends StatelessWidget {
                           handler.handleEvent(
                               nav,
                               LoginOutputState(
-                                  event: LoginEvent.back));
+                                  event: DefaultEvent.back));
                         },
                       ),
                       TextButton(
@@ -89,7 +88,7 @@ class LoginPage extends StatelessWidget {
                             handler.handleEvent(
                                 nav,
                                 LoginOutputState(
-                                    event: LoginEvent.next,
+                                    event: DefaultEvent.next,
                                     email: email,
                                     password: password));
                           }
@@ -119,8 +118,7 @@ class LoginInputState {
 class LoginOutputState {
   final String? password;
   final String? email;
-  final LoginEvent event;
+  final DefaultEvent event;
   LoginOutputState({required this.event, this.email, this.password});
 }
 
-enum LoginEvent { next, back }

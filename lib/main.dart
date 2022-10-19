@@ -3,7 +3,7 @@ import 'package:billiards/authenticate.dart';
 import 'package:billiards/data.dart';
 
 import 'package:flutter/material.dart';
-import 'beta/services/billiard_state.dart';
+import 'src/services/billiard_state.dart';
 import 'pages.dart';
 import 'billiards_theme.dart';
 import 'package:firebase_core/firebase_core.dart';

@@ -2,7 +2,7 @@
 import 'dart:async';
 
 import 'package:billiards/authenticate.dart';
-import 'package:billiards/beta/services/billiard_state.dart';
+import 'package:billiards/src/services/billiard_state.dart';
 import 'package:billiards/data.dart';
 import 'package:billiards/widgets.dart';
 import 'package:flutter/material.dart';

@@ -3,28 +3,40 @@ import 'package:billiards/authenticate.dart';
 import 'package:billiards/data.dart';
 
 import 'package:billiards/beta/services/organisation.dart';
-import 'package:billiards/beta/services/billiard_state.dart';
+import 'package:billiards/src/services/billiard_state.dart';
 
 import 'package:billiards/src/journey/journey_controller.dart';
 
 import 'package:billiards/pages.dart';
 import 'package:flutter/material.dart';
 
+///
+/// Controls the Login Journey
+///
 class Login extends JourneyController {
+
+  /// Service that authenticates the user
   final AuthenticationService auth;
+
+  /// Manages database access
   final DataService data;
+
+  /// The main application state. Holds state that is common to many journeys
   final BilliardState coreState;
 
+  /// State for this journey
   final LoginState state = LoginState();
 
   Login(this.auth, this.data, this.coreState);
 
+  /// Shows the login page
   @override
   void start(BuildContext context) {
-    showLogin(context);
+    _showLogin(context);
   }
 
-  void showLogin(BuildContext context) {
+  /// Display the login page with default values
+  void _showLogin(BuildContext context) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -34,14 +46,19 @@ class Login extends JourneyController {
                 )));
   }
 
+  /// Handles the response from the login page
   Future<Widget> handleLogin(LoginOutputState pageOutputState) async {
     var c = Completer<Widget>();
     switch (pageOutputState.event) {
-      case LoginEvent.back:
+      case DefaultEvent.back:
         c.complete(const BilliardsWelcomePage());
         break;
 
-      case LoginEvent.next:
+      case DefaultEvent.home:
+        c.complete(const BilliardsWelcomePage());
+        break;
+
+      case DefaultEvent.next:
         state.email = pageOutputState.email;
 
         final users = await data.query(User.objectType, field: User.emailLabel, value: state.email);
@@ -52,6 +69,7 @@ class Login extends JourneyController {
 
               coreState.user = User(data: users.first);
               coreState.user.setLoginDateTime(DateTime.now());
+              coreState.user.setDateTime(User.lastFailedLoginLabel, null);
               coreState.user.set(User.loginFailureCountLabel, 0);
               await data.set(coreState.user.dbReference, coreState.user.data);
               final audit = Audit.fromValues(coreState.user.dbReference, 'Login');
@@ -72,8 +90,12 @@ class Login extends JourneyController {
               }
             } catch (ex) {
               // the login has failed - probably because the password
-              final u = User(data: users.first);
-              u.set(User.loginFailureCountLabel, u.loginFailureCount + 1);
+              final userData = User(data: users.first);
+              userData.set(User.loginFailureCountLabel, userData.loginFailureCount + 1);
+              userData.setDateTime(User.lastFailedLoginLabel, DateTime.now());
+              data.set(userData.dbReference, userData.data);
+              final audit = Audit.fromValues(coreState.user.dbReference, 'Failed Login');
+              data.set(audit.dbReference, audit.data);
               c.complete(LoginPage(
                 handler: PageEventHandler<LoginOutputState>(handleLogin),
                 inputState: LoginInputState(
@@ -94,8 +116,5 @@ class LoginState {
   String? email;
 }
 
-//TODO save last login date/time
-//TODO record failed login count
 //TODO prevent reattempted login based on number of failed attempts
-//TODO Audit failed login attempts - handle failed login attempt properly
 //TODO Show last login date/time on Landing Page
