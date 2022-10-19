@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 ///
 /// Containing class for an Object that store data in the form of a Map.
@@ -83,6 +84,20 @@ abstract class DataObject extends Object {
   /// Get the data corresponding to the label from the DataObject
   ///
   dynamic get(String label) => _data[label];
+
+  DateTime? getDateTime(String label) {
+    return _data[label] == null ? null : DateTime.fromMillisecondsSinceEpoch(data[label]);
+  }
+
+  setDateTime(String label, DateTime? value) {
+    if (value == null) {
+      set(label, value);
+    } else {
+      set(label, value.millisecondsSinceEpoch);
+    }
+  }
+
+
 
   /// {@macro immutable}
   bool get immutable => get(immutableLabel) ?? false;

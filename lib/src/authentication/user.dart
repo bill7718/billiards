@@ -15,6 +15,7 @@ class User extends PersistableDataObject {
   static const String userIdLabel = 'userId';
   static const String lastLoginLabel = 'lastLogin';
   static const String lastButOneLoginLabel = 'lastButOneLogin';
+  static const String loginFailureCountLabel = 'loginFailureCount';
 
   User({Map<String, dynamic>? data }) : super(objectType, data: data);
 
@@ -29,13 +30,15 @@ class User extends PersistableDataObject {
   /// An external id for the user. For Firebase implementations this will hold the [uid]
   String get userId=> get(userIdLabel) ?? (throw UserException('User record must always have a $userIdLabel'));
 
-  DateTime get lastLogin=>get(lastLoginLabel);
+  DateTime? get lastLogin=>getDateTime(lastLoginLabel);
 
-  DateTime get lastButOneLogin=>get(lastButOneLoginLabel);
+  DateTime? get lastButOneLogin=>getDateTime(lastButOneLoginLabel);
+
+  int get loginFailureCount=> get(loginFailureCountLabel) ?? 0;
 
   void setLoginDateTime(DateTime d) {
-    set(lastButOneLoginLabel, lastLogin);
-    set(lastLoginLabel, d);
+    setDateTime(lastButOneLoginLabel, lastLogin);
+    setDateTime(lastLoginLabel, d);
   }
 }
 
