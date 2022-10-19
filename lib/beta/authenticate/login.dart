@@ -52,18 +52,22 @@ class Login  extends JourneyController {
               c.completeError('User: ${state.email} does not have a single user');
             } else {
               coreState.user = User(data: list.first);
+              coreState.user.setLoginDateTime(DateTime.now());
+              coreState.user.set(User.loginFailureCountLabel, 0);
+              data.set(coreState.user.dbReference, coreState.user.data);
               // see if there is just one linked organisation. If so then set that as well
               var fRel = DataObjectRelationship.list(data, coreState.user.id, User.userToOrganisation);
               fRel.then( (list) {
+                var audit = Audit.fromValues(coreState.user.dbReference, 'Login');
+                data.set(audit.dbReference, audit.data);
                 if (list.length == 1) {
                   var fOrg = data.get(PersistableDataObject.buildDBReference(Organisation.objectType, list.first.toId ?? ''));
                   fOrg.then( (map) {
                     coreState.organisation = Organisation(data: map);
-                    var audit = Audit.fromValues(coreState.user.dbReference, 'Login');
-                    data.set(audit.dbReference, audit.data);
                     c.complete(const BilliardsLandingPage());
                   });
                 } else {
+
                   c.complete(const BilliardsLandingPage());
                 }
               });

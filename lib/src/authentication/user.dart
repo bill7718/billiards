@@ -35,6 +35,10 @@ class User extends PersistableDataObject {
   DateTime? get lastButOneLogin=>getDateTime(lastButOneLoginLabel);
 
   int get loginFailureCount=> get(loginFailureCountLabel) ?? 0;
+  //
+  // void resetLoginFailureCount()=>set(loginFailureCountLabel, null);
+  //
+  // void incrementLoginFailureCount() =>set(loginFailureCountLabel, loginFailureCount + 1);
 
   void setLoginDateTime(DateTime d) {
     setDateTime(lastButOneLoginLabel, lastLogin);
