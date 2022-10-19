@@ -80,4 +80,12 @@ class BilliardFormTheme extends ThemeExtension<BilliardFormTheme> {
     return this;
   }
 
+  static BilliardFormTheme get(BuildContext context) {
+    BilliardFormTheme? theme = Theme.of(context).extension<BilliardFormTheme>();
+    if (theme == null) { throw Exception('Missing Billiard Form Theme');}
+
+    final BilliardFormTheme formTheme = theme;
+    return formTheme;
+
+  }
 }

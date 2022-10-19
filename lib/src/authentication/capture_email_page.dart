@@ -35,10 +35,7 @@ class CaptureEmailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     try {
-      BilliardFormTheme? theme = Theme.of(context).extension<BilliardFormTheme>();
-      if (theme == null) { throw Exception('Missing Billiard Form Theme in Capture Email Page');}
-
-      final BilliardFormTheme formTheme = theme;
+      final formTheme = BilliardFormTheme.get(context);
 
       final formKey = GlobalKey();
       var email = '';
