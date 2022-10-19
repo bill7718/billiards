@@ -89,7 +89,7 @@ class Login extends JourneyController {
                   c.complete(const BilliardsLandingPage());
               }
             } catch (ex) {
-              // the login has failed - probably because the password
+              // the login has failed - probably because the password is not valid
               final userData = User(data: users.first);
               userData.set(User.loginFailureCountLabel, userData.loginFailureCount + 1);
               userData.setDateTime(User.lastFailedLoginLabel, DateTime.now());
@@ -109,6 +109,16 @@ class Login extends JourneyController {
         }
     }
     return c.future;
+  }
+
+  bool isLoginAllowed(User user) {
+    if (user.loginFailureCount < 4) { return true; }
+    final last = user.lastFailedLogin ?? DateTime.now();
+
+    if (DateTime.now().millisecondsSinceEpoch > (last.millisecondsSinceEpoch + 300000)) {
+      return true;
+    }
+    return false;
   }
 }
 
