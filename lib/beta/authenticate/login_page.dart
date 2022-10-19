@@ -33,7 +33,12 @@ class LoginPage extends StatelessWidget {
                 children: [
                   const Center(child: Heading(text: 'Login')),
                   FormRow(
+                      content: ErrorMessage(
+                        text: inputState.error,
+                      )),
+                  FormRow(
                       content: BilliardTextField(
+                        initialValue: inputState.email,
                     obscure: true,
                     label: 'Email',
                     valueBinder: (v) {
@@ -50,6 +55,7 @@ class LoginPage extends StatelessWidget {
                   FormRow(
                       content: BilliardTextField(
                         obscure: true,
+                        initialValue: inputState.password,
                         label: 'Password',
                         valueBinder: (v) {
                           password = v;
@@ -99,7 +105,14 @@ class LoginPage extends StatelessWidget {
 
 class LoginInputState {
 
-  LoginInputState();
+
+  final String? password;
+  final String? email;
+  final String? error;
+
+
+  LoginInputState({this.email, this.password, this.error });
+
 
 }
 
