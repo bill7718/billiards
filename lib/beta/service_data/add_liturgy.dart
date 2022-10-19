@@ -1,7 +1,4 @@
 import 'dart:async';
-
-
-import 'package:billiards/beta/service_data/liturgy.dart';
 import 'package:billiards/data.dart';
 
 import 'package:billiards/beta/services/billiard_state.dart';
@@ -33,7 +30,7 @@ class AddLiturgy extends JourneyController {
                   handler:
                       PageEventHandler<CaptureLiturgyNameOutputState>(handleCaptureName),
                   inputState: CaptureLiturgyNameInputState(
-                      coreState.user.email! ),
+                      coreState.user.email ),
                 )));
   }
 
@@ -50,7 +47,7 @@ class AddLiturgy extends JourneyController {
 
       case DefaultEvent.next:
         state.name = pageOutputState.name;
-        c.complete(CaptureLiturgyContentPage(inputState: CaptureLiturgyContentInputState(coreState.user.email!, state.name ?? ''),
+        c.complete(CaptureLiturgyContentPage(inputState: CaptureLiturgyContentInputState(coreState.user.email, state.name ?? ''),
             handler: PageEventHandler<CaptureLiturgyContentOutputState>(handleCaptureContent)));
     }
 
@@ -65,7 +62,7 @@ class AddLiturgy extends JourneyController {
           handler:
           PageEventHandler<CaptureLiturgyNameOutputState>(handleCaptureName),
           inputState: CaptureLiturgyNameInputState(
-              coreState.user.email!, name: state.name ),
+              coreState.user.email, name: state.name ),
         ));
         break;
 
@@ -75,7 +72,7 @@ class AddLiturgy extends JourneyController {
 
       case DefaultEvent.next:
         state.name = pageOutputState.text;
-        c.complete(ReviewLiturgyContentPage(inputState: ReviewLiturgyContentInputState(coreState.user.email!, state.name ?? '', state.text ?? ''),
+        c.complete(ReviewLiturgyContentPage(inputState: ReviewLiturgyContentInputState(coreState.user.email, state.name ?? '', state.text ?? ''),
             handler: PageEventHandler<ReviewLiturgyContentOutputState>(handleReviewContent),));
     }
 
@@ -90,7 +87,7 @@ class AddLiturgy extends JourneyController {
           handler:
           PageEventHandler<CaptureLiturgyContentOutputState>(handleCaptureContent),
           inputState: CaptureLiturgyContentInputState(
-              coreState.user.email!, state.name ?? '', text: state.text ),
+              coreState.user.email, state.name ?? '', text: state.text ),
         ));
         break;
 

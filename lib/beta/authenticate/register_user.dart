@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:billiards/authenticate.dart';
 import 'package:billiards/data.dart';
 
-
 import 'package:billiards/beta/services/billiard_state.dart';
 import 'package:billiards/pages.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +9,7 @@ import 'package:flutter/material.dart';
 import '../../src/journey/journey_controller.dart';
 import '../services/organisation.dart';
 
-
-class RegisterUser  extends JourneyController {
-
+class RegisterUser extends JourneyController {
   final AuthenticationService auth;
   final DataService data;
   final BilliardState coreState;
@@ -27,36 +24,41 @@ class RegisterUser  extends JourneyController {
   }
 
   void showCaptureEmail(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>
-        CaptureEmailPage(
-            inputState: CaptureEmailInputState(null),
-            handler: PageEventHandler<CaptureEmailOutputState>(handleCaptureEmail))) );
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => CaptureEmailPage(
+                inputState: CaptureEmailInputState(null),
+                handler: PageEventHandler<CaptureEmailOutputState>(
+                    handleCaptureEmail))));
   }
 
   Future<Widget> handleCaptureEmail(CaptureEmailOutputState pageOutputState) {
     var c = Completer<Widget>();
     switch (pageOutputState.event) {
-      case DefaultEvent.back :
+      case DefaultEvent.back:
         c.complete(const BilliardsWelcomePage());
         break;
 
-      case DefaultEvent.home :
+      case DefaultEvent.home:
         c.complete(const BilliardsWelcomePage());
         break;
 
-      case DefaultEvent.next :
+      case DefaultEvent.next:
         state.email = pageOutputState.email;
         var fUser = findUserByEmail(state.email ?? '');
-        fUser.then( (user) {
+        fUser.then((user) {
           if (user == null) {
             c.complete(CapturePasswordPage(
                 inputState: state,
-                handler: PageEventHandler<CapturePasswordOutputState>(handleCapturePassword)));
+                handler: PageEventHandler<CapturePasswordOutputState>(
+                    handleCapturePassword)));
           } else {
-
             c.complete(CaptureEmailPage(
-                inputState: CaptureEmailInputState(state.email, error: 'This email address is already in use'),
-                handler: PageEventHandler<CaptureEmailOutputState>(handleCaptureEmail)));
+                inputState: CaptureEmailInputState(state.email,
+                    error: 'This email address is already in use'),
+                handler: PageEventHandler<CaptureEmailOutputState>(
+                    handleCaptureEmail)));
           }
         });
 
@@ -65,53 +67,60 @@ class RegisterUser  extends JourneyController {
     return c.future;
   }
 
-  Future<Widget> handleCapturePassword(CapturePasswordOutputState pageOutputState) {
+  Future<Widget> handleCapturePassword(
+      CapturePasswordOutputState pageOutputState) {
     var c = Completer<Widget>();
     switch (pageOutputState.event) {
-      case DefaultEvent.back :
+      case DefaultEvent.back:
         c.complete(CaptureEmailPage(
             inputState: CaptureEmailInputState(state.email),
-            handler: PageEventHandler<CaptureEmailOutputState>(handleCaptureEmail)));
+            handler:
+                PageEventHandler<CaptureEmailOutputState>(handleCaptureEmail)));
         break;
 
-      case DefaultEvent.home :
+      case DefaultEvent.home:
         c.complete(const BilliardsWelcomePage());
         break;
 
-      case DefaultEvent.next :
+      case DefaultEvent.next:
         state.password = pageOutputState.password;
         c.complete(CaptureOrganisationPage(
             inputState: CaptureOrganisationInputState(null),
-            handler: PageEventHandler<CaptureOrganisationOutputState>(handleCaptureOrganisation)));
+            handler: PageEventHandler<CaptureOrganisationOutputState>(
+                handleCaptureOrganisation)));
         break;
     }
     return c.future;
   }
 
-  Future<Widget> handleCaptureOrganisation(CaptureOrganisationOutputState pageOutputState) {
+  Future<Widget> handleCaptureOrganisation(
+      CaptureOrganisationOutputState pageOutputState) {
     var c = Completer<Widget>();
     switch (pageOutputState.event) {
-      case DefaultEvent.back :
+      case DefaultEvent.back:
         c.complete(CapturePasswordPage(
             inputState: state,
-            handler: PageEventHandler<CapturePasswordOutputState>(handleCapturePassword)));
+            handler: PageEventHandler<CapturePasswordOutputState>(
+                handleCapturePassword)));
         break;
 
-      case DefaultEvent.home :
+      case DefaultEvent.home:
         c.complete(const BilliardsWelcomePage());
         break;
 
-      case DefaultEvent.next :
+      case DefaultEvent.next:
         state.organisation = pageOutputState.organisation;
         var fOrg = findOrganisationByName(state.organisation ?? '');
-        fOrg.then( (org) {
+        fOrg.then((org) {
           if (org == null) {
             var f = createUser();
             f.then((user) {
-              Organisation o = Organisation.fromValues(state.organisation ?? '');
+              Organisation o =
+                  Organisation.fromValues(state.organisation ?? '');
               var fOrg = data.set(o.dbReference, o.data);
-              fOrg.then( (_) {
-                var rel = DataObjectRelationship.data(from: user, to: o, type: User.userToOrganisation);
+              fOrg.then((_) {
+                var rel = DataObjectRelationship.data(
+                    from: user, to: o, type: User.userToOrganisation);
                 var fRel = data.set(rel.dbReference, rel.data);
                 fRel.then((_) {
                   coreState.user = user;
@@ -122,11 +131,13 @@ class RegisterUser  extends JourneyController {
             });
           } else {
             c.complete(CaptureOrganisationPage(
-                inputState: CaptureOrganisationInputState(pageOutputState.organisation, error: 'This organisation is already in use'),
-                handler: PageEventHandler<CaptureOrganisationOutputState>(handleCaptureOrganisation)));
+                inputState: CaptureOrganisationInputState(
+                    pageOutputState.organisation,
+                    error: 'This organisation is already in use'),
+                handler: PageEventHandler<CaptureOrganisationOutputState>(
+                    handleCaptureOrganisation)));
           }
         });
-
 
         break;
     }
@@ -137,23 +148,24 @@ class RegisterUser  extends JourneyController {
     var c = Completer<User>();
     var fUser = auth.createUser(state.email ?? 'null', state.password ?? '');
     fUser.then((value) {
-        User u = User.fromValues(state.email ?? '', value);
-        Future fUpdate = data.set(u.dbReference, u.data);
-        fUpdate.then((_) {
-          c.complete(u);
-        }).onError((error, stackTrace) {
-          c.completeError(error ?? 'Failed to crate user ${state.email}');
-        });
+      User u = User.create(state.email ?? '', value);
+      Future fUpdate = data.set(u.dbReference, u.data);
+      fUpdate.then((_) {
+        c.complete(u);
+      }).onError((error, stackTrace) {
+        c.completeError(error ?? 'Failed to create user ${state.email}');
+      });
     }).onError((error, stackTrace) {
-      c.completeError(error ?? 'Failed to crate user ${state.email}');
+      c.completeError(error ?? 'Failed to create user ${state.email}');
     });
     return c.future;
   }
 
   Future<User?> findUserByEmail(String email) {
     var c = Completer<User?>();
-    var fUsers = data.query(User.objectType, field: User.emailLabel, value: email);
-    fUsers.then( (list) {
+    var fUsers =
+        data.query(User.objectType, field: User.emailLabel, value: email);
+    fUsers.then((list) {
       if (list.isEmpty) {
         c.complete(null);
       } else {
@@ -170,15 +182,17 @@ class RegisterUser  extends JourneyController {
 
   Future<Organisation?> findOrganisationByName(String name) {
     var c = Completer<Organisation?>();
-    var fOrgs = data.query(Organisation.objectType, field: Organisation.nameLabel, value: name);
-    fOrgs.then( (list) {
+    var fOrgs = data.query(Organisation.objectType,
+        field: Organisation.nameLabel, value: name);
+    fOrgs.then((list) {
       if (list.isEmpty) {
         c.complete(null);
       } else {
         if (list.length == 1) {
           c.complete(Organisation(data: list.first));
         } else {
-          c.completeError('Organisation $name appears more than once in the database');
+          c.completeError(
+              'Organisation $name appears more than once in the database');
         }
       }
     });
@@ -188,17 +202,10 @@ class RegisterUser  extends JourneyController {
 }
 
 class RegisterUserState implements CapturePasswordInputState {
-
-
   String? email;
 
   @override
   String? password;
 
-  @override
   String? organisation;
 }
-
-
-
-

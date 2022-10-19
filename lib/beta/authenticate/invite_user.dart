@@ -31,7 +31,7 @@ class InviteUser extends JourneyController {
                   handler:
                       PageEventHandler<InviteUserOutputState>(handleInviteUser),
                   inputState: InviteUserInputState(
-                      coreState.user.email!, coreState.organisation?.name ?? ''),
+                      coreState.user.email, coreState.organisation?.name ?? ''),
                 )));
   }
 
@@ -67,7 +67,7 @@ class InviteUser extends JourneyController {
               handler:
                   PageEventHandler<InviteUserOutputState>(handleInviteUser),
               inputState: InviteUserInputState(
-                  coreState.user.email!, coreState.organisation?.name ?? '',
+                  coreState.user.email, coreState.organisation?.name ?? '',
               error: 'User ${state.email} already exists. You cannot invite them to your organisation'),
             ));
           }

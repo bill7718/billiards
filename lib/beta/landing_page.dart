@@ -40,8 +40,8 @@ Lightwave allows you create and display liturgy for your church.
       drawer: Drawer(
         child: ListView(
           children: [
-            SizedBox(height: 40, child: DrawerHeader(child: Heading(text: 'Header'), padding: EdgeInsets.zero, margin: EdgeInsets.zero,)),
-            ListTile(title: Text('Invite New User'), onTap: (){
+            const SizedBox(height: 40, child: DrawerHeader(padding: EdgeInsets.zero, margin: EdgeInsets.zero,child: Heading(text: 'Header'),)),
+            ListTile(title: const Text('Invite New User'), onTap: (){
               final j = InviteUser(Provider.of<DataService>(context, listen: false), Provider.of<BilliardState>(context, listen: false));
               j.start(context);
             },),
@@ -53,8 +53,8 @@ Lightwave allows you create and display liturgy for your church.
           child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Center ( child: Heading(text: 'Welcome to Lightwave')),
+        children: const [
+          Center ( child: Heading(text: 'Welcome to Lightwave')),
           FormRow(content: BodyText(text: lightWaveText),)
 
 

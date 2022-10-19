@@ -13,17 +13,35 @@ class User extends PersistableDataObject {
 
   static const String emailLabel = 'email';
   static const String userIdLabel = 'userId';
+  static const String lastLoginLabel = 'lastLogin';
+  static const String lastButOneLoginLabel = 'lastButOneLogin';
 
   User({Map<String, dynamic>? data }) : super(objectType, data: data);
 
-  User.fromValues(String email, String userId) : super(objectType) {
+  User.create(String email, String userId) : super(objectType) {
     set(emailLabel, email);
     set(userIdLabel, userId);
   }
 
   /// The user's email address
-  String? get email=>get(emailLabel);
+  String get email=> get(emailLabel) ?? (throw UserException('User record must always have a $emailLabel'));
 
   /// An external id for the user. For Firebase implementations this will hold the [uid]
-  String? get userId=>get(userIdLabel);
+  String get userId=> get(userIdLabel) ?? (throw UserException('User record must always have a $userIdLabel'));
+
+  DateTime get lastLogin=>get(lastLoginLabel);
+
+  DateTime get lastButOneLogin=>get(lastButOneLoginLabel);
+
+  void setLoginDateTime(DateTime d) {
+    set(lastButOneLoginLabel, lastLogin);
+    set(lastLoginLabel, d);
+  }
+}
+
+class UserException implements Exception {
+  // ignore: unused_field
+  final String _message;
+
+  UserException(this._message);
 }
