@@ -5,6 +5,8 @@ import 'package:billiards/data.dart';
 import 'package:billiards/beta/services/current_time_provider.dart';
 
 import 'package:flutter/material.dart';
+import 'beta/data/data_service.dart';
+import 'beta/data/firebase_service.dart';
 import 'src/services/billiard_state.dart';
 import 'pages.dart';
 import 'billiards_theme.dart';

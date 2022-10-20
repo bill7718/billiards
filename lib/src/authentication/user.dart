@@ -1,6 +1,8 @@
 
 import 'package:billiards/data.dart';
 
+import '../../beta/data/persistable_data_object.dart';
+
 ///
 /// Models a User in the current system
 ///
@@ -42,6 +44,7 @@ class User extends PersistableDataObject {
 
   /// The number of consecutive failed login attempts
   int get loginFailureCount=> get(loginFailureCountLabel) ?? 0;
+
 
   void setLoginDateTime(DateTime d) {
     setDateTime(lastButOneLoginLabel, lastLogin);

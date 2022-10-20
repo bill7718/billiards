@@ -9,6 +9,7 @@ import 'package:billiards/src/journey/journey_controller.dart';
 import 'package:billiards/pages.dart';
 import 'package:flutter/material.dart';
 
+import '../data/data_service.dart';
 import 'invite_user_page.dart';
 import 'invited_user.dart';
 

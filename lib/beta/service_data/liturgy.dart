@@ -1,6 +1,8 @@
 
 import 'package:billiards/data.dart';
 
+import '../data/persistable_data_object.dart';
+
 class Liturgy extends EmbeddedPersistableDataObject {
 
   static const String objectType = 'Liturgy';

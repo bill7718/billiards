@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import 'authenticate/login.dart';
 import 'authenticate/register_user.dart';
+import 'data/data_service.dart';
 
 ///
 /// The page that welcomes a new user
