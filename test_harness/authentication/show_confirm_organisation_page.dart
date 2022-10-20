@@ -1,4 +1,5 @@
 import 'package:billiards/authenticate.dart';
+import 'package:billiards/beta/authenticate/confirm_organisation_page.dart';
 import 'package:billiards/src/journey/journey_controller.dart';
 
 import 'package:flutter/material.dart';

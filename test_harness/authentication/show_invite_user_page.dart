@@ -1,5 +1,6 @@
 import 'package:billiards/alpha/show_page.dart';
 import 'package:billiards/authenticate.dart';
+import 'package:billiards/beta/authenticate/invite_user_page.dart';
 import 'package:billiards/src/journey/journey_controller.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:billiards/authenticate.dart';
 import 'package:billiards/data.dart';
+import 'package:billiards/src/authentication/capture_email_page.dart';
 
 import 'package:billiards/src/services/billiard_state.dart';
 import 'package:billiards/pages.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/material.dart';
 
 import '../../src/journey/journey_controller.dart';
 import '../services/organisation.dart';
+import 'capture_organisation_page.dart';
+import 'capture_password_page.dart';
 
 class RegisterUser extends JourneyController {
   final AuthenticationService auth;

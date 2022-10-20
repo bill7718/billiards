@@ -1,5 +1,6 @@
 import 'package:billiards/alpha/show_page.dart';
 import 'package:billiards/authenticate.dart';
+import 'package:billiards/beta/authenticate/capture_password_page.dart';
 import 'package:billiards/src/authentication/capture_email_page.dart';
 import 'package:billiards/src/journey/journey_controller.dart';
 import 'package:flutter/material.dart';

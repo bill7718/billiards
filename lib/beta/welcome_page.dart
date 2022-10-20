@@ -8,6 +8,9 @@ import 'package:billiards/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'authenticate/login.dart';
+import 'authenticate/register_user.dart';
+
 ///
 /// The page that welcomes a new user
 ///
