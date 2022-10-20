@@ -1,6 +1,8 @@
+library main;
 
 import 'package:billiards/authenticate.dart';
 import 'package:billiards/data.dart';
+import 'package:billiards/beta/services/current_time_provider.dart';
 
 import 'package:flutter/material.dart';
 import 'src/services/billiard_state.dart';
@@ -13,6 +15,7 @@ import 'package:provider/provider.dart';
 var auth = AuthenticationService();
 var data = FlutterFirebaseService();
 var state = BilliardState();
+var timeProvider = CurrentTimeProvider();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +44,8 @@ class BilliardsApp extends StatelessWidget {
         providers: [
           Provider<AuthenticationService>.value(value: auth),
           Provider<DataService>.value(value: data),
-          Provider<BilliardState>.value(value: state)
+          Provider<BilliardState>.value(value: state),
+          Provider<CurrentTimeProvider>.value(value: timeProvider)
         ],
     child: MaterialApp(
         debugShowCheckedModeBanner: false,

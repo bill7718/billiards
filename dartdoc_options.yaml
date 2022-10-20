@@ -11,7 +11,7 @@ dartdoc:
     - no-canonical-found
     - unknown-file
     - no-library-level-docs
-  include: [ authenticate, service_data, pages, widgets, data, journey, widgets ]
+  include: [ authenticate, service_data, pages, widgets, data, journey, widgets, main ]
 
 
 

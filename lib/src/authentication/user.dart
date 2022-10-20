@@ -31,12 +31,16 @@ class User extends PersistableDataObject {
   /// An external id for the user. For Firebase implementations this will hold the [uid]
   String get userId=> get(userIdLabel) ?? (throw UserException('User record must always have a $userIdLabel'));
 
+  /// The date/time of the most recent login
   DateTime? get lastLogin=>getDateTime(lastLoginLabel);
 
+  /// The date/time of the login before the most recent one
   DateTime? get lastButOneLogin=>getDateTime(lastButOneLoginLabel);
 
+  /// The date/time of the last failed login. Only held if the last login was not successful
   DateTime? get lastFailedLogin=>getDateTime(lastFailedLoginLabel);
 
+  /// The number of consecutive failed login attempts
   int get loginFailureCount=> get(loginFailureCountLabel) ?? 0;
 
   void setLoginDateTime(DateTime d) {
@@ -45,6 +49,7 @@ class User extends PersistableDataObject {
   }
 }
 
+/// Generic Exception class for [User] Object Exceptions
 class UserException implements Exception {
   // ignore: unused_field
   final String _message;
