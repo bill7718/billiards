@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 ///
 /// Containing class for an Object that store data in the form of a Map.
@@ -155,53 +154,7 @@ abstract class DataObject extends Object {
   ///
   dynamic toJson() => const JsonEncoder().convert(data);
 
-  ///
-  /// Adds the [value] to the list corresponding to [listLabel]
-  ///
-  /// If the list already contains an entry where
-  /// _data[key] = _data[keyValue]
-  ///
-  /// then replace the object with this one
-  ///
-  void addToList(String listLabel, DataObject value,
-      {String? key, String? keyValue}) {
-    _data[listLabel] ??= <Map<String, dynamic>>[];
-    List currentValue = _data[listLabel];
 
-    var i = 0;
-    while (i < currentValue.length) {
-      if (key != null && keyValue != null) {
-        if (currentValue[i][key] == keyValue) {
-          currentValue.removeAt(i);
-          i = currentValue.length + 1;
-        }
-      }
-      i++;
-    }
-
-    currentValue.add(value.data);
-    _data[listLabel] = currentValue;
-    _notify(listLabel);
-  }
-
-  void removeFromList(
-      String listLabel, DataObject value, String key, String keyValue) {
-    _data[listLabel] ??= <Map<String, dynamic>>[];
-    List currentValue = _data[listLabel];
-
-    var i = 0;
-    while (i < currentValue.length) {
-      if (currentValue[i][key] == keyValue) {
-        currentValue.removeAt(i);
-        currentValue.add(value.data);
-        _data[listLabel] = currentValue;
-        _notify(listLabel);
-        i = currentValue.length + 1;
-      }
-
-      i++;
-    }
-  }
 }
 
 class DataObjectException implements Exception {
