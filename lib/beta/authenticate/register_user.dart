@@ -8,9 +8,11 @@ import 'package:billiards/pages.dart';
 import 'package:flutter/material.dart';
 
 import '../../src/journey/journey_controller.dart';
-import '../data/data_object_relationship.dart';
-import '../data/data_service.dart';
-import '../services/organisation.dart';
+import '../../src/data/data_object_relationship.dart';
+import '../../src/data/data_service.dart';
+import '../../src/services/organisation.dart';
+import '../../src/pages/landing_page.dart';
+import '../../src/pages/welcome_page.dart';
 import 'capture_organisation_page.dart';
 import 'capture_password_page.dart';
 
@@ -120,8 +122,8 @@ class RegisterUser extends JourneyController {
           if (org == null) {
             var f = createUser();
             f.then((user) {
-              Organisation o =
-                  Organisation.fromValues(state.organisation ?? '');
+              Organisation o = Organisation();
+              o.name = state.organisation;
               var fOrg = data.set(o.dbReference, o.data);
               fOrg.then((_) {
                 var rel = DataObjectRelationship.data(

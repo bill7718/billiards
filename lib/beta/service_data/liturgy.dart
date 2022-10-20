@@ -1,7 +1,7 @@
 
 import 'package:billiards/data.dart';
 
-import '../data/persistable_data_object.dart';
+import '../../src/data/persistable_data_object.dart';
 
 class Liturgy extends EmbeddedPersistableDataObject {
 

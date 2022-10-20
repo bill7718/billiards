@@ -1,5 +1,5 @@
 
-import 'package:billiards/beta/services/organisation.dart';
+import 'package:billiards/src/services/organisation.dart';
 import 'package:billiards/src/authentication/user.dart';
 
 

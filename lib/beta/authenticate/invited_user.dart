@@ -1,6 +1,6 @@
 
 
-import 'package:billiards/beta/data/persistable_data_object.dart';
+import 'package:billiards/src/data/persistable_data_object.dart';
 
 class InvitedUser extends PersistableDataObject {
 

@@ -3,6 +3,9 @@ import 'package:billiards/src/journey/journey_controller.dart';
 import 'package:billiards/widgets.dart';
 import 'package:flutter/material.dart';
 
+///
+/// A standard login page with email and password
+///
 class LoginPage extends StatelessWidget {
   final LoginInputState inputState;
   final PageEventHandler<LoginOutputState> handler;
@@ -99,6 +102,9 @@ class LoginPage extends StatelessWidget {
   }
 }
 
+///
+/// The input data for the Login page
+///
 class LoginInputState {
   final String? password;
   final String? email;
@@ -107,6 +113,9 @@ class LoginInputState {
   LoginInputState({this.email, this.password, this.error});
 }
 
+///
+/// The output data from the Login page
+///
 class LoginOutputState {
   final String? password;
   final String? email;

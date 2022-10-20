@@ -2,15 +2,14 @@ import 'package:billiards/authenticate.dart';
 import 'package:billiards/data.dart';
 
 import 'package:billiards/src/services/billiard_state.dart';
-import 'package:billiards/beta/services/current_time_provider.dart';
+import 'package:billiards/src/services/current_time_provider.dart';
 
 import 'package:billiards/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'authenticate/login.dart';
-import 'authenticate/register_user.dart';
-import 'data/data_service.dart';
+import '../../beta/authenticate/login.dart';
+import '../../beta/authenticate/register_user.dart';
 
 ///
 /// The page that welcomes a new user

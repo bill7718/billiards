@@ -3,6 +3,9 @@ import 'dart:async';
 import 'data_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+///
+/// Integration with Firebase to save and retrieve data
+///
 class FlutterFirebaseService implements DataService {
 
   @override

@@ -1,4 +1,4 @@
-import 'package:billiards/beta/error_page.dart';
+import 'package:billiards/src/pages/error_page.dart';
 import 'package:flutter/material.dart';
 
 ///

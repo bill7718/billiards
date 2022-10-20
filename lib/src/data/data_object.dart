@@ -35,21 +35,6 @@ abstract class DataObject extends Object {
       throw DataObjectException(
           'Cannot set $runtimeType. It is immutable: $_data');
     }
-
-    if (value is List) {
-      if (value.isNotEmpty) {
-        var o = value.first;
-        if (o is DataObject) {
-          var l = <Map<String, dynamic>>[];
-          for (var i in value) {
-            l.add(i.data);
-          }
-          _data[label] = l;
-          _notify(label);
-          return;
-        }
-      }
-    }
     var oldValue = get(label);
     if (value == null) {
       _data.remove(label);
@@ -84,10 +69,17 @@ abstract class DataObject extends Object {
   ///
   dynamic get(String label) => _data[label];
 
+  /// Get the value as a [DateTime] Object
+  ///
+  /// Returns a DateTime based on the data being an integer number of milliseconds since the Epoch
+  ///
   DateTime? getDateTime(String label) {
     return _data[label] == null ? null : DateTime.fromMillisecondsSinceEpoch(data[label]);
   }
 
+  /// Set the [DateTime] Object
+  ///
+  /// Sets the value as a time in milliseconds since Epoch
   setDateTime(String label, DateTime? value) {
     if (value == null) {
       set(label, value);
@@ -111,13 +103,6 @@ abstract class DataObject extends Object {
     }
     return response;
   }
-
-  ///
-  /// Used to provide a list of the fields used by this DataObject
-  ///
-  /// Implementing classes do not need to implement this method
-  ///
-  List<String> get fields => <String>[];
 
   ///
   /// Used to validate the data in this DataObject

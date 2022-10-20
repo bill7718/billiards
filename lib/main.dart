@@ -2,13 +2,12 @@ library main;
 
 import 'package:billiards/authenticate.dart';
 import 'package:billiards/data.dart';
-import 'package:billiards/beta/services/current_time_provider.dart';
+import 'package:billiards/pages.dart';
+import 'package:billiards/src/services/current_time_provider.dart';
 
 import 'package:flutter/material.dart';
-import 'beta/data/data_service.dart';
-import 'beta/data/firebase_service.dart';
+
 import 'src/services/billiard_state.dart';
-import 'pages.dart';
 import 'billiards_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';

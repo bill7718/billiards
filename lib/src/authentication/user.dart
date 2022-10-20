@@ -1,8 +1,6 @@
 
 import 'package:billiards/data.dart';
 
-import '../../beta/data/persistable_data_object.dart';
-
 ///
 /// Models a User in the current system
 ///

@@ -1,8 +1,5 @@
-
-
 import 'dart:math';
-import 'data_object.dart';
-
+import 'package:billiards/data.dart';
 
 ///
 /// A [DataObject] that is designed to be persisted in a json database
