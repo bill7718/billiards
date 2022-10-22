@@ -9,3 +9,6 @@ library authenticate;
 export 'src/authentication/authentication_service.dart';
 
 export 'src/authentication/user.dart';
+
+export 'src/authentication/login_page.dart';
+export 'src/authentication/capture_email_page.dart';

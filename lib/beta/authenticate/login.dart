@@ -4,15 +4,13 @@ import 'package:billiards/data.dart';
 import 'package:billiards/journey.dart';
 import 'package:billiards/pages.dart';
 import 'package:billiards/services.dart';
+import 'package:billiards/src/services/date_formatter.dart';
 import 'package:flutter/material.dart';
-
-import 'login_page.dart';
 
 ///
 /// Controls the Login Journey
 ///
 class Login extends JourneyController {
-
   static const String loginTimeoutMessage = 'You have failed login too many times. Please try again later.';
 
   /// Service that authenticates the user
@@ -26,7 +24,7 @@ class Login extends JourneyController {
 
   /// State for this journey
   final LoginState state = LoginState();
-  
+
   final CurrentTimeProvider timeProvider;
 
   Login(this.auth, this.data, this.coreState, this.timeProvider);
@@ -87,11 +85,17 @@ class Login extends JourneyController {
                     final organisationData = await data
                         .get(PersistableDataObject.buildDBReference(Organisation.objectType, organisationLinks.first.toId ?? ''));
                     coreState.organisation = Organisation(data: organisationData);
-                    c.complete(const BilliardsLandingPage());
+                    final d = coreState.user.lastButOneLogin;
+                    d != null
+                        ? c.complete(BilliardsLandingPage(message: 'Your last login was ${formatDate(d)}'))
+                        : c.complete(const BilliardsLandingPage());
                     break;
 
                   default:
-                    c.complete(const BilliardsLandingPage());
+                    final d = coreState.user.lastButOneLogin;
+                    d != null
+                    ? c.complete(BilliardsLandingPage(message: 'Your last login was ${formatDate(d)}'))
+                    : c.complete(const BilliardsLandingPage());
                 }
               }
             } catch (ex) {
@@ -118,7 +122,9 @@ class Login extends JourneyController {
   }
 
   bool isLoginTimedOut(User user) {
-    if (user.loginFailureCount < 4) { return false; }
+    if (user.loginFailureCount < 4) {
+      return false;
+    }
     final last = user.lastFailedLogin?.millisecondsSinceEpoch ?? timeProvider.getTime();
 
     if (timeProvider.getTime() > (last + 100000 * (user.loginFailureCount - 3))) {

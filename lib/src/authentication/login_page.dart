@@ -1,5 +1,5 @@
 import 'package:billiards/billiards_theme.dart';
-import 'package:billiards/src/journey/journey_controller.dart';
+import 'package:billiards/journey.dart';
 import 'package:billiards/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +7,15 @@ import 'package:flutter/material.dart';
 /// A standard login page with email and password
 ///
 class LoginPage extends StatelessWidget {
+
+  static const String emailError = 'Please enter your email address';
+  static const String passwordError = 'Please enter your password';
+
+  static const String emailLabel = 'Email';
+  static const String passwordLabel = 'Password';
+  static const String nextButtonText = 'Next';
+  static const String backButtonText = 'Back';
+
   final LoginInputState inputState;
   final PageEventHandler<LoginOutputState> handler;
 
@@ -42,13 +51,13 @@ class LoginPage extends StatelessWidget {
                         content: BilliardTextField(
                       initialValue: inputState.email,
                       obscure: true,
-                      label: 'Email',
+                      label: emailLabel,
                       valueBinder: (v) {
                         email = v;
                       },
                       validator: (v) {
                         if ((v ?? '').isEmpty) {
-                          return 'Please enter an email address';
+                          return emailError;
                         }
                         return null;
                       },
@@ -58,13 +67,14 @@ class LoginPage extends StatelessWidget {
                         content: BilliardTextField(
                       obscure: true,
                       initialValue: inputState.password,
-                      label: 'Password',
+                      label: passwordLabel,
                       valueBinder: (v) {
                         password = v;
                       },
+                      // ignore: body_might_complete_normally_nullable
                       validator: (v) {
                         if ((v ?? '').isEmpty) {
-                          return 'Please enter a password';
+                          return passwordError;
                         }
                       },
                     )),
@@ -73,14 +83,14 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         TextButton(
-                          child: const Text('Back'),
+                          child: const Text(backButtonText),
                           onPressed: () {
                             final nav = Navigator.of(context);
                             handler.handleEvent(nav, LoginOutputState(event: DefaultEvent.back));
                           },
                         ),
                         TextButton(
-                          child: const Text('Next'),
+                          child: const Text(nextButtonText),
                           onPressed: () {
                             final state = formKey.currentState as FormState;
                             if (state.validate()) {

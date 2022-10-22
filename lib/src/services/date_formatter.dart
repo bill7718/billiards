@@ -1,4 +1,5 @@
 
+/// Format a DateTime to dd/mm/yyyy hh:mm
 String formatDate(DateTime d) {
   final String day = d.day.toString();
   final String month = d.month.toString();
