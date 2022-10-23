@@ -9,4 +9,8 @@ class CurrentTimeProvider {
 
   /// Returns the time in milliseconds since the Epoch
   int getTime()=>DateTime.now().millisecondsSinceEpoch;
+
+  /// Returns the time in milliseconds since the Epoch as a Date time object
+  DateTime currentDateTime() =>DateTime.now();
+
 }

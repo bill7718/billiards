@@ -6,8 +6,14 @@ void main() {
     testWidgets('When I ask for the current time then it is provided', (WidgetTester tester) async {
       var time = CurrentTimeProvider();
       var t = DateTime.now().millisecondsSinceEpoch;
+
       expect(time.getTime() >= t, true);
       expect(time.getTime() <= t + 5, true);
+
+      var d = time.currentDateTime();
+
+      expect(d.millisecondsSinceEpoch >= t, true);
+      expect(d.millisecondsSinceEpoch <= t + 5, true);
     });
 
 
