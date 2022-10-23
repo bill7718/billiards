@@ -26,18 +26,15 @@ class RegisterUser extends JourneyController {
   RegisterUser(this.auth, this.data, this.coreState);
 
   @override
-  void start(BuildContext context) {
-    showCaptureEmail(context);
-  }
+  PageEventHandler<void> get startHandler => PageEventHandler<void>(firstPage);
 
-  void showCaptureEmail(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => CaptureEmailPage(
-                inputState: CaptureEmailInputState(null),
-                handler: PageEventHandler<CaptureEmailOutputState>(
-                    handleCaptureEmail))));
+  Future<Widget> firstPage() {
+    var c = Completer<Widget>();
+    c.complete(CaptureEmailPage(
+        inputState: CaptureEmailInputState(null),
+        handler: PageEventHandler<CaptureEmailOutputState>(
+            handleCaptureEmail)));
+    return c.future;
   }
 
   Future<Widget> handleCaptureEmail(CaptureEmailOutputState pageOutputState) {

@@ -14,7 +14,6 @@ import '../../src/pages/landing_page.dart';
 import 'invite_user_page.dart';
 import 'invited_user.dart';
 
-
 class InviteUser extends JourneyController {
   final DataService data;
   final BilliardState coreState;
@@ -24,20 +23,15 @@ class InviteUser extends JourneyController {
   InviteUser(this.data, this.coreState);
 
   @override
-  void start(BuildContext context) {
-    showInviteUser(context);
-  }
+  PageEventHandler<void> get startHandler => PageEventHandler<void>(firstPage);
 
-  void showInviteUser(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => InviteUserPage(
-                  handler:
-                      PageEventHandler<InviteUserOutputState>(handleInviteUser),
-                  inputState: InviteUserInputState(
-                      coreState.user.email, coreState.organisation?.name ?? ''),
-                )));
+  Future<Widget> firstPage() {
+    var c = Completer<Widget>();
+    c.complete(InviteUserPage(
+      handler: PageEventHandler<InviteUserOutputState>(handleInviteUser),
+      inputState: InviteUserInputState(coreState.user.email, coreState.organisation?.name ?? ''),
+    ));
+    return c.future;
   }
 
   Future<Widget> handleInviteUser(InviteUserOutputState pageOutputState) {
@@ -56,8 +50,7 @@ class InviteUser extends JourneyController {
         var fUser = findUserByEmail(state.email ?? '');
         fUser.then((user) {
           if (user == null) {
-            var iu = InvitedUser.fromValues(state.email ?? '',
-                coreState.user.id, coreState.organisation?.id ?? '');
+            var iu = InvitedUser.fromValues(state.email ?? '', coreState.user.id, coreState.organisation?.id ?? '');
             var f = data.set(iu.dbReference, iu.data);
             f.then((_) {
               c.complete(BilliardsLandingPage(
@@ -69,11 +62,9 @@ class InviteUser extends JourneyController {
             });
           } else {
             c.complete(InviteUserPage(
-              handler:
-                  PageEventHandler<InviteUserOutputState>(handleInviteUser),
-              inputState: InviteUserInputState(
-                  coreState.user.email, coreState.organisation?.name ?? '',
-              error: 'User ${state.email} already exists. You cannot invite them to your organisation'),
+              handler: PageEventHandler<InviteUserOutputState>(handleInviteUser),
+              inputState: InviteUserInputState(coreState.user.email, coreState.organisation?.name ?? '',
+                  error: 'User ${state.email} already exists. You cannot invite them to your organisation'),
             ));
           }
         }).onError((error, stackTrace) {
@@ -86,8 +77,7 @@ class InviteUser extends JourneyController {
 
   Future<User?> findUserByEmail(String email) {
     var c = Completer<User?>();
-    var fUsers =
-        data.query(User.objectType, field: User.emailLabel, value: email);
+    var fUsers = data.query(User.objectType, field: User.emailLabel, value: email);
     fUsers.then((list) {
       if (list.isEmpty) {
         c.complete(null);

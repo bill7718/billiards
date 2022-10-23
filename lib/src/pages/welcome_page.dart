@@ -52,7 +52,7 @@ class BilliardsWelcomePage extends StatelessWidget {
                     onPressed: () {
                       final j = RegisterUser(Provider.of<AuthenticationService>(context, listen: false),
                           Provider.of<DataService>(context, listen: false), Provider.of<BilliardState>(context, listen: false));
-                      j.start(context);
+                      j.startHandler.handleEvent(Navigator.of(context), null);
                     },
                   ),
                   TextButton(
@@ -63,7 +63,7 @@ class BilliardsWelcomePage extends StatelessWidget {
                           Provider.of<DataService>(context, listen: false),
                           Provider.of<BilliardState>(context, listen: false),
                           Provider.of<CurrentTimeProvider>(context, listen: false));
-                      j.start(context);
+                      j.startHandler.handleEvent(Navigator.of(context), null);
                     },
                   )
                 ],

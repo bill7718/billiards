@@ -1,15 +1,11 @@
 
 import 'dart:async';
-
-import 'package:billiards/authenticate.dart';
-import 'package:billiards/src/services/billiard_state.dart';
+import 'package:billiards/beta/authenticate/invite_user.dart';
 import 'package:billiards/data.dart';
+import 'package:billiards/services.dart';
 import 'package:billiards/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../beta/authenticate/invite_user.dart';
-import '../data/data_service.dart';
 
 
 
@@ -46,7 +42,7 @@ Lightwave allows you create and display liturgy for your church.
             const SizedBox(height: 40, child: DrawerHeader(padding: EdgeInsets.zero, margin: EdgeInsets.zero,child: Heading(text: 'Header'),)),
             ListTile(title: const Text('Invite New User'), onTap: (){
               final j = InviteUser(Provider.of<DataService>(context, listen: false), Provider.of<BilliardState>(context, listen: false));
-              j.start(context);
+              j.startHandler.handleEvent(Navigator.of(context), null);
             },),
           ],
         )

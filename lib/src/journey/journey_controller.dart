@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 /// Grouping abstract class for classes that control journeys
 ///
 abstract class JourneyController {
-  void start(BuildContext context);
+
+  PageEventHandler<void> get startHandler;
 }
 
 ///

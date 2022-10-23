@@ -29,21 +29,19 @@ class Login extends JourneyController {
 
   Login(this.auth, this.data, this.coreState, this.timeProvider);
 
-  /// Shows the login page
   @override
-  void start(BuildContext context) {
-    _showLogin(context);
-  }
+  PageEventHandler<void> get startHandler=>PageEventHandler<void>(firstPage);
 
-  /// Display the login page with default values
-  void _showLogin(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => LoginPage(
-                  handler: PageEventHandler<LoginOutputState>(handleLogin),
-                  inputState: LoginInputState(),
-                )));
+
+
+
+  Future<Widget> firstPage() {
+    var c = Completer<Widget>();
+    c.complete(LoginPage(
+      handler: PageEventHandler<LoginOutputState>(handleLogin),
+      inputState: LoginInputState(),
+    ));
+    return c.future;
   }
 
   /// Handles the response from the login page
