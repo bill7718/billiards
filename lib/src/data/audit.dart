@@ -20,4 +20,8 @@ class Audit extends EmbeddedPersistableDataObject {
         }
       }
   }
+
+  Audit.fromMap(Map<String, dynamic> data) : super (objectType, data['parent'], data: data);
+
+  String get event => get(auditEventLabel);
 }

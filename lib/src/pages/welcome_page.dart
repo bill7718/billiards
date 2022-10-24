@@ -8,7 +8,7 @@ import 'package:billiards/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../beta/authenticate/login.dart';
+import '../authentication/login.dart';
 import '../../beta/authenticate/register_user.dart';
 
 ///

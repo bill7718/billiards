@@ -14,6 +14,8 @@ class Login extends JourneyController {
   static const String loginTimeoutMessage = 'You have failed login too many times. Please try again later.';
   static const String loginFailureMessage = 'Your login has failed. Please try again';
 
+  static const String auditSuccess = 'Login';
+
   /// Service that authenticates the user
   final AuthenticationService auth;
 
@@ -82,7 +84,7 @@ class Login extends JourneyController {
                   coreState.user.setDateTime(User.lastFailedLoginLabel, null);
                   coreState.user.set(User.loginFailureCountLabel, 0);
                   await data.set(coreState.user.dbReference, coreState.user.data);
-                  final audit = Audit.fromValues(coreState.user.dbReference, 'Login');
+                  final audit = Audit.fromValues(coreState.user.dbReference, auditSuccess);
                   await data.set(audit.dbReference, audit.data);
 
                   // see if there is just one linked organisation. If so then set that as well
