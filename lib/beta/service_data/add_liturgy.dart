@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import '../../src/data/data_service.dart';
 import 'capture_liturgy_content_page.dart';
 import 'capture_liturgy_name_page.dart';
-import 'liturgy.dart';
+import '../../src/service_data/liturgy.dart';
 
 class AddLiturgy extends JourneyController {
   final DataService data;
